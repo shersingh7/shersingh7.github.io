@@ -1,67 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>Android Weather App</title>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <!-- Header Section -->
-    <header>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#about">About Me</a></li>
-          <li><a href="index.html#work">Portfolio</a></li>
-        </ul>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather App — Davinder Verma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="starfield" class="starfield-canvas"></canvas>
 
-    <!-- Main Content Wrapper -->
-    <div class="main-content">
-      <!-- Intro Section -->
-      <section class="intro">
-        <div class="intro__content">
-          <h1 class="section__title section__title--intro">Android Weather App</h1>
-          <p class="section__subtitle section__subtitle--intro">(Java)</p>
-        </div>
-      </section>
-
-      <!-- Portfolio Item Content -->
-      <div class="portfolio-item-individual">
-        <p>
-          This weather app fetches real-time weather information using the WeatherAPI, providing users with instant updates based on their current location.
-        </p>
-        <img src="img/weather.jpg" alt="Weather App Screenshot" />
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>Contact me at: <a href="mailto:me@davinderverma.ca">me@davinderverma.ca</a></p>
-      <ul class="social-list">
-      <li>
-          <a href="https://twitter.com/davinder0110v">
-          <i class="fab fa-twitter"></i> X
-          </a>
-      </li>
-      <li>
-          <a href="https://www.linkedin.com/in/davinder-verma">
-          <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-      </li>
-      <li>
-          <a href="https://github.com/shersingh7">
-          <i class="fab fa-github"></i> GitHub
-          </a>
-      </li>
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-icon">&#9881;</span> DV</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
       </ul>
-  </footer>
+    </div>
+  </nav>
 
-    <script src="js/script.js"></script>
-  </body>
+  <main class="portfolio-detail">
+    <div class="portfolio-detail-hero reveal">
+      <p class="eyebrow">Android · API</p>
+      <h1>Weather App</h1>
+    </div>
+    <div class="portfolio-detail-body reveal">
+      <p>A weather app that fetches real-time data using the WeatherAPI, providing instant updates based on your current location. Clean interface, live data, always current.</p>
+      <img src="img/weatherMain.jpg" alt="Weather App Screenshot" />
+    </div>
+    <footer class="footer portfolio-detail-footer">
+      <div class="container">
+        <p>&copy; 2026 Davinder Verma. The Empire Strikes Code.</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" alt="" />
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
 </html>

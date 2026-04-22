@@ -1,147 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>Futuristic Portfolio</title>
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    
-    <!-- Link to external CSS in the css folder -->
-    <link rel="stylesheet" href="css/style.css" /> 
-    <style>
-      /* Intro section */
-      .intro {
-        min-height: 100vh; /* Use min-height to ensure it takes up the full viewport height */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #000, #001a33);
-        padding: 0 20px; /* Add some padding to avoid any overflow on small screens */
-        box-sizing: border-box; /* Ensure padding does not affect width calculation */
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Davinder Verma — Imperial Developer</title>
+  <meta name="description" content="Davinder Verma — developer, photographer, trader. Serving the digital empire." />
 
-      .parallax {
-        text-align: center;
-      }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-      .neon-text {
-        color: #00ccff;
-        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
-        font-size: 3rem; /* Adjust the size to better fit smaller screens */
-      }
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-      .tagline {
-        color: #f2f2f2;
-        font-size: 1.3rem; /* Adjust the font size slightly for better readability */
-        margin-top: 1rem;
-      }
-    </style>
-  </head>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
-  <body>
-    <!-- Header -->
-    <header>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#work">Portfolio</a></li>
-        </ul>
-      </nav>
-    </header>
+  <!-- Three.js Canvas (starfield) -->
+  <canvas id="starfield" class="starfield-canvas"></canvas>
 
-    <!-- Intro Section -->
-    <section id="home" class="intro">
-      <div class="parallax">
-        <h1 class="neon-text">Welcome to the Future</h1>
-        <p class="tagline">Davinder Verma - Tech Alchemist</p>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo"><span class="logo-icon">&#9881;</span> DV</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-indicator" id="navIndicator"></div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">DEVELOPER &middot; PHOTOGRAPHER &middot; TRADER</p>
+      <h1 class="hero-title" id="heroTitle">DAVINDER<br/>VERMA</h1>
+      <p class="hero-sub">Turning ideas into craft. Code, cameras, and markets &mdash; I build across domains.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-sith">See My Work</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
       </div>
-    </section>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-      <h2 class="section-title">Professional Services</h2>
-      <div class="service-list">
-        <div class="service-card">
-          <h3>Web Development</h3>
-          <p>
-            I specialize in crafting bespoke solutions and transforming innovative ideas into reality. I prioritize clean design patterns, streamlined content structures, and engaging user interactions. Proficient in web and mobile application development, I strive to deliver exceptional results.
-          </p>
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>REACT &bull; NODE.JS &bull; JAVA &bull; FIREBASE &bull; KOTLIN &bull; PYTHON &bull; ML KIT &bull; EXPRESS &bull; ANDROID &bull; PHOTOGRAPHY &bull; TRADING &bull; FIREBASE &bull; REACT &bull; NODE.JS &bull; JAVA &bull; FIREBASE &bull; KOTLIN &bull; PYTHON &bull; ML KIT &bull; EXPRESS &bull; ANDROID &bull; PHOTOGRAPHY &bull; TRADING &bull; FIREBASE</span>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section id="services" class="section services-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">IMPERIAL SERVICES</p>
+        <h2 class="section-title">What I Do</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card tilt-card reveal">
+          <div class="service-card-glow"></div>
+          <div class="service-icon"><i class="fas fa-code"></i></div>
+          <h3>Web &amp; Mobile Development</h3>
+          <p>Crafting bespoke solutions — from responsive web apps to native mobile experiences. Clean architecture, thoughtful UX, code that scales.</p>
+          <div class="service-tags"><span>React</span><span>Node.js</span><span>Java</span><span>Firebase</span></div>
         </div>
-        <div class="service-card">
+        <div class="service-card tilt-card reveal">
+          <div class="service-card-glow"></div>
+          <div class="service-icon"><i class="fas fa-camera"></i></div>
           <h3>Photography</h3>
-          <p>
-            With a passion for capturing high-quality digital imagery, I excel in the art of photography. My expertise spans various styles, encompassing composition, lighting, and advanced camera techniques. Equipped with a discerning eye for aesthetics and a comprehensive understanding of cutting-edge camera technologies, I consistently produce stunning visual compositions.
-          </p>
+          <p>High-quality digital imagery spanning composition, lighting, and advanced techniques. An eye for aesthetics backed by technical mastery.</p>
+          <div class="service-tags"><span>Portrait</span><span>Street</span><span>Event</span><span>Editing</span></div>
         </div>
-        <div class="service-card">
-          <h3>Stock & Crypto Trading</h3>
-          <p>
-            As a highly skilled Stock/Crypto Trader, I possess extensive market knowledge and a deep understanding of how stocks are influenced by current events. Leveraging meticulous analysis and strategic insights into market fluctuations, I execute well-informed buy and sell orders, optimizing profitability.
-          </p>
+        <div class="service-card tilt-card reveal">
+          <div class="service-card-glow"></div>
+          <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Stock &amp; Crypto Trading</h3>
+          <p>Deep market knowledge, meticulous analysis, strategic execution. Data-driven buy/sell decisions optimizing profitability.</p>
+          <div class="service-tags"><span>Equities</span><span>Crypto</span><span>Analysis</span><span>Risk Mgmt</span></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2 class="section-title">About Me</h2>
-        <p>
-        Greetings, I am Davinder. Rather than defining myself solely by past achievements, I prefer to focus on the future and the work I aspire to accomplish. While skills can be acquired, one's personality is inherent.
-        </p>
-        <p>
-        I thrive on perpetual learning, consistently seeking out new challenges, and engaging in endeavors that have a profound impact. My abundance of energy fuels my pursuit of diverse interests, hobbies, and artistic pursuits. With an innate ability to rapidly acquire new skills, I effortlessly navigate various projects and roles.
-        </p>
-    
-        <!-- Image Section with fallback -->
-        <img src="img/profile.jpg" alt="Portrait of Davinder" onerror="this.style.display='none';" />
-    </section>
+  <!-- About -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal">
+          <div class="about-image-frame">
+            <img src="img/img2.jpg" alt="Davinder Verma" />
+          </div>
+          <div class="about-image-accent"></div>
+        </div>
+        <div class="about-content reveal">
+          <p class="section-eyebrow">IMPERIAL DOSSIER</p>
+          <h2 class="section-title">About Me</h2>
+          <p class="about-bio">I am Davinder. I define myself by the work I want to do, not the work I have done. Skills can be taught; personality cannot.</p>
+          <p>I thrive on perpetual learning, consistently seeking challenges that have real impact. My energy fuels a range of interests from code to cameras to markets. I pick up new skills fast, and I navigate diverse projects with ease.</p>
+          <p>Whether it is shipping a full-stack app, framing the perfect shot, or reading market signals — I show up fully.</p>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-number" data-target="4">0</span><span class="stat-plus">+</span><span class="stat-label">Projects Shipped</span></div>
+            <div class="stat"><span class="stat-number" data-target="3">0</span><span class="stat-label">Disciplines</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Portfolio Section -->
-    <section id="work" class="portfolio">
-      <h2 class="section-title">My Work</h2>
+  <!-- Portfolio -->
+  <section id="work" class="section portfolio-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">IMPERIAL ARSENAL</p>
+        <h2 class="section-title">Portfolio</h2>
+      </div>
       <div class="portfolio-grid">
-        <a href="portfolio-item1.html" class="portfolio-item">
-          <img src="img/chat.png" alt="Chat App" />
+        <a href="portfolio-item1.html" class="portfolio-card reveal">
+          <div class="portfolio-card-image"><img src="img/chat.png" alt="Chat App" /></div>
+          <div class="portfolio-card-overlay"><i class="fas fa-expand"></i></div>
+          <div class="portfolio-card-content">
+            <p class="portfolio-card-eyebrow">Android &middot; Java</p>
+            <h3>Chat App</h3>
+            <p>Real-time messaging powered by Firebase.</p>
+          </div>
         </a>
-        <a href="portfolio-item2.html" class="portfolio-item">
-          <img src="img/google-lens.jpg" alt="Google Lens Clone" />
+        <a href="portfolio-item2.html" class="portfolio-card reveal">
+          <div class="portfolio-card-image"><img src="img/googleLensClone.png" alt="Google Lens Clone" /></div>
+          <div class="portfolio-card-overlay"><i class="fas fa-expand"></i></div>
+          <div class="portfolio-card-content">
+            <p class="portfolio-card-eyebrow">Android &middot; ML Kit</p>
+            <h3>Google Lens Clone</h3>
+            <p>On-device object detection via ML Kit.</p>
+          </div>
         </a>
-        <a href="portfolio-item3.html" class="portfolio-item">
-          <img src="img/weatherMain.jpg" alt="Weather App" />
+        <a href="portfolio-item3.html" class="portfolio-card reveal">
+          <div class="portfolio-card-image"><img src="img/weatherMain.jpg" alt="Weather App" /></div>
+          <div class="portfolio-card-overlay"><i class="fas fa-expand"></i></div>
+          <div class="portfolio-card-content">
+            <p class="portfolio-card-eyebrow">Android &middot; API</p>
+            <h3>Weather App</h3>
+            <p>Live weather data with clean UI.</p>
+          </div>
         </a>
-        <a href="portfolio-item4.html" class="portfolio-item">
-          <img src="img/food.jpg" alt="Food Ordering" />
+        <a href="portfolio-item4.html" class="portfolio-card reveal">
+          <div class="portfolio-card-image"><img src="img/desiKhanna.jpg" alt="Desi Khanna" /></div>
+          <div class="portfolio-card-overlay"><i class="fas fa-expand"></i></div>
+          <div class="portfolio-card-content">
+            <p class="portfolio-card-eyebrow">Full-Stack &middot; Node.js</p>
+            <h3>Desi Khanna</h3>
+            <p>Food ordering platform end-to-end.</p>
+          </div>
         </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>Contact me at: <a href="mailto:me@davinderverma.ca">me@davinderverma.ca</a></p>
-        <ul class="social-list">
-        <li>
-            <a href="https://twitter.com/davinder0110v">
-            <i class="fab fa-twitter"></i> X
-            </a>
-        </li>
-        <li>
-            <a href="https://www.linkedin.com/in/davinder-verma">
-            <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/shersingh7">
-            <i class="fab fa-github"></i> GitHub
-            </a>
-        </li>
-        </ul>
-    </footer>
+  <!-- Contact -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">TRANSMISSION</p>
+        <h2 class="section-title">Contact</h2>
+      </div>
+      <div class="contact-content reveal">
+        <p class="contact-lead">Have a project in mind? Want to collaborate? Open a channel.</p>
+        <a href="mailto:me@davinderverma.ca" class="btn btn-sith magnetic-btn">me@davinderverma.ca</a>
+        <div class="contact-socials">
+          <a href="https://twitter.com/davinder0110v" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/in/davinder-verma" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/shersingh7" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- JavaScript for Smooth Scrolling -->
-    <script src="js/script.js"></script>
-  </body>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Davinder Verma. The Empire Strikes Code.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" alt="" />
+  </div>
+
+  <!-- Three.js via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
 </html>
