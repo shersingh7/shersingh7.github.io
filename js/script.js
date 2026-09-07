@@ -1,6 +1,6 @@
 /* ============================================
    DAVINDER VERMA — IMPERIAL PORTFOLIO JS
-   Three.js starfield, text scramble, cursor,
+   Canvas 2D starfield, text scramble, cursor,
    scroll spy, tilt cards, counter, lightbox
    ============================================ */
 
@@ -10,135 +10,102 @@
   // --- CHARS for scramble effect ---
   const GLITCH_CHARS = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`0123456789ABCDEF';
 
-  // --- Three.js Starfield (always fires first) ---
+  // --- Starfield (vanilla 2D canvas — replaces ~600KB Three.js) ---
   function initStarfield() {
     const canvas = document.getElementById('starfield');
-    if (!canvas || typeof THREE === 'undefined') return;
+    if (!canvas || !canvas.getContext) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isSmallOrHighDpi = window.innerWidth <= 768 || window.devicePixelRatio > 2.5;
-    const maxPixelRatio = isSmallOrHighDpi ? 1.5 : 2.0;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isSmallOrHighDpi });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
-
-    // Stars (white points with subtle Sith tints)
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, isSmallOrHighDpi ? 1.5 : 2.0);
     const starCount = isSmallOrHighDpi ? 600 : 1200;
-    const starGeo = new THREE.BufferGeometry();
-    const starPos = new Float32Array(starCount * 3);
-    const starSizes = new Float32Array(starCount);
-    const starColors = new Float32Array(starCount * 3);
 
-    // Sith red + holo blue + white mix
+    // Same palette as before: sith red, holo blue, white, warm white, dark sith
     const palette = [
-      [0.83, 0.13, 0.24],   // sith red
-      [0.31, 0.76, 0.97],   // holo blue
-      [1.0, 1.0, 1.0],      // white
-      [0.9, 0.9, 0.95],     // warm white
-      [0.6, 0.15, 0.2],     // dark sith
+      'rgba(212, 33, 61, 1)', 'rgba(79, 195, 247, 1)', 'rgba(255, 255, 255, 1)',
+      'rgba(230, 230, 243, 1)', 'rgba(153, 38, 51, 1)',
     ];
 
+    const stars = [];
     for (let i = 0; i < starCount; i++) {
-      starPos[i * 3]     = (Math.random() - 0.5) * 80;
-      starPos[i * 3 + 1] = (Math.random() - 0.5) * 80;
-      starPos[i * 3 + 2] = (Math.random() - 0.5) * 60;
-      starSizes[i] = Math.random() * 1.5 + 0.3;
-      const col = palette[Math.floor(Math.random() * palette.length)];
-      starColors[i * 3]     = col[0];
-      starColors[i * 3 + 1] = col[1];
-      starColors[i * 3 + 2] = col[2];
-    }
-
-    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
-    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-
-    const starMat = new THREE.PointsMaterial({
-      size: 0.3, vertexColors: true, transparent: true, opacity: 0.85,
-      sizeAttenuation: true, blending: THREE.AdditiveBlending,
-    });
-
-    const stars = new THREE.Points(starGeo, starMat);
-    scene.add(stars);
-    camera.position.z = 15;
-
-    // Render static frame and return if reduced motion requested
-    if (reducedMotion) {
-      renderer.render(scene, camera);
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
-        renderer.render(scene, camera);
+      stars.push({
+        x: Math.random(), y: Math.random(),     // position (0..1 screen space)
+        z: 0.2 + Math.random() * 0.8,           // depth (parallax + drift factor)
+        size: 0.3 + Math.random() * 1.5,         // radius base (px)
+        tw: Math.random() * Math.PI * 2,         // shimmer phase
+        ts: 0.5 + Math.random() * 1.5,           // shimmer speed
+        ci: Math.floor(Math.random() * palette.length),
       });
-      return;
+    }
+    stars.sort((a, b) => a.ci - b.ci); // batch fillStyle switches
+
+    let W = 0, H = 0;
+    function resize() {
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = Math.round(W * pixelRatio);
+      canvas.height = Math.round(H * pixelRatio);
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    }
+    resize();
+
+    let mouseX = 0, mouseY = 0, cmx = 0, cmy = 0;
+    if (!reducedMotion) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+      }, { passive: true });
     }
 
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseY = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
+    let time = 0, last = 0, animId = null;
 
-    let time = 0;
-    let animId = null;
-    const clock = new THREE.Clock();
-
-    function animate() {
-      animId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
+    function draw(ts) {
+      const delta = last ? Math.min((ts - last) / 1000, 0.05) : 0.016;
+      last = ts;
       time += delta;
 
-      stars.rotation.y += 0.0003;
-      stars.rotation.x += 0.0001;
-      starMat.opacity = 0.75 + 0.15 * Math.sin(time * 1.5);
+      ctx.clearRect(0, 0, W, H);
 
-      // Mouse parallax
-      camera.rotation.y += (mouseX * 0.1 - camera.rotation.y) * 0.02;
-      camera.rotation.x += (mouseY * 0.1 - camera.rotation.x) * 0.02;
+      // eased mouse parallax (same feel as old camera lerp)
+      cmx += (mouseX - cmx) * 0.02;
+      cmy += (mouseY - cmy) * 0.02;
 
-      renderer.render(scene, camera);
+      // global opacity pulse — identical to old starMat.opacity = 0.75 + 0.15*sin(t*1.5)
+      const alpha = 0.75 + 0.15 * Math.sin(time * 1.5);
+      ctx.globalAlpha = alpha;
+
+      let currentCi = -1;
+      for (let i = 0; i < starCount; i++) {
+        const s = stars[i];
+        if (s.ci !== currentCi) { ctx.fillStyle = palette[s.ci]; currentCi = s.ci; }
+        // slow depth-scaled drift + parallax (mimics old cloud rotation)
+        let dx = s.x + time * 0.004 * s.z + cmx * 0.05 * s.z;
+        let dy = s.y + cmy * 0.05 * s.z;
+        dx -= Math.floor(dx); dy -= Math.floor(dy); // wrap 0..1
+        // subtle per-star size shimmer (reads as twinkle, no alpha churn)
+        const r = s.size * (0.5 + s.z * 0.5) * (1 + 0.2 * Math.sin(time * s.ts + s.tw));
+        ctx.beginPath();
+        ctx.arc(dx * W, dy * H, r, 0, 6.2832);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
     }
 
-    function startAnimation() {
-      if (!animId && !document.hidden) {
-        clock.start();
-        animate();
-      }
+    function loop(ts) { animId = requestAnimationFrame(loop); draw(ts); }
+    function start() { if (!animId && !document.hidden) { last = 0; animId = requestAnimationFrame(loop); } }
+    function stop() { if (animId) { cancelAnimationFrame(animId); animId = null; } }
+
+    if (reducedMotion) {
+      draw(0); // single static frame, no loop
+    } else {
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+      start();
     }
-
-    function stopAnimation() {
-      if (animId) {
-        cancelAnimationFrame(animId);
-        animId = null;
-        clock.stop();
-      }
-    }
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAnimation();
-      } else {
-        startAnimation();
-      }
-    });
-
-    startAnimation();
 
     window.addEventListener('resize', () => {
-      const resizeSmallOrHighDpi = window.innerWidth <= 768 || window.devicePixelRatio > 2.5;
-      const resizePixelRatio = resizeSmallOrHighDpi ? 1.5 : 2.0;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, resizePixelRatio));
-      if (document.hidden) {
-        renderer.render(scene, camera);
-      }
+      resize();
+      if (reducedMotion || document.hidden) draw(0);
     });
   }
 
