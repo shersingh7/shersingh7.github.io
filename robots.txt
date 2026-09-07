@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davinderverma.ca/sitemap.xml

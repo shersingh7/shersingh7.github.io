@@ -7,18 +7,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <meta name="description" content="End-to-end food ordering platform built on Node.js." />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <meta property="og:title" content="Desi Khanna — Davinder Verma" />
+  <meta property="og:description" content="End-to-end food ordering platform built on Node.js." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://davinderverma.ca/img/profile.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Desi Khanna — Davinder Verma" />
+  <meta name="twitter:description" content="End-to-end food ordering platform built on Node.js." />
+  <meta name="twitter:image" content="https://davinderverma.ca/img/profile.jpg" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="cursor-glow" id="cursorGlow"></div>
   <div class="scroll-progress" id="scrollProgress"></div>
-  <canvas id="starfield" class="starfield-canvas"></canvas>
+  <canvas id="starfield" class="starfield-canvas" aria-hidden="true"></canvas>
 
-  <nav class="nav scrolled" id="nav">
+  <nav class="nav scrolled" id="nav" data-static-nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo"><span class="logo-icon">&#9881;</span> DV</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
@@ -38,7 +49,7 @@
     </div>
     <div class="portfolio-detail-body reveal">
       <p>A full-featured food ordering website with multi-user authentication, cart functionality, and complete order flow — built with Node.js and Express.</p>
-      <img src="img/desiKhanna.jpg" alt="Desi Khanna Screenshot" />
+      <img src="img/desiKhanna.jpg" width="1921" height="895" alt="Desi Khanna Screenshot" loading="lazy" decoding="async" />
     </div>
     <footer class="footer portfolio-detail-footer">
       <div class="container">
@@ -47,12 +58,12 @@
     </footer>
   </main>
 
-  <div class="lightbox" id="lightbox">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
     <img class="lightbox-img" id="lightboxImg" alt="" />
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="js/script.js" defer></script>
 </body>
 </html>

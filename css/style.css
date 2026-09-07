@@ -46,7 +46,7 @@
 
 /* --- Reset --- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { -webkit-font-smoothing: antialiased; }
 body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
@@ -313,6 +313,9 @@ ul { list-style: none; }
   margin-bottom: 1.5rem; color: var(--sith); font-size: 1.2rem;
   box-shadow: 0 0 15px var(--sith-glow); transition: all 0.3s ease;
 }
+.service-icon svg {
+  width: 1.25rem; height: 1.25rem; fill: currentColor;
+}
 .service-card:hover .service-icon {
   box-shadow: 0 0 25px var(--sith-glow); transform: scale(1.1);
 }
@@ -391,6 +394,7 @@ ul { list-style: none; }
   background: rgba(212, 33, 61, 0.3); opacity: 0; transition: opacity 0.3s ease;
   z-index: 2; font-size: 1.5rem; color: #fff;
 }
+.portfolio-card-overlay svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
 .portfolio-card:hover .portfolio-card-overlay { opacity: 1; }
 .portfolio-card-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
 .portfolio-card-eyebrow {
@@ -419,6 +423,7 @@ ul { list-style: none; }
   border: 1px solid var(--border-holo); display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem; color: var(--holo); transition: all 0.3s var(--ease-out);
 }
+.contact-socials a svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
 .contact-socials a:hover {
   background: var(--sith-dark); border-color: var(--sith); color: var(--sith);
   box-shadow: 0 0 20px var(--sith-glow); transform: translateY(-3px) scale(1.1);
@@ -489,23 +494,6 @@ ul { list-style: none; }
 .portfolio-detail-body img:hover { transform: scale(1.02); }
 .portfolio-detail-footer { margin-top: auto; }
 
-/* Video container */
-.video-container {
-  margin: 2rem auto; max-width: 520px; position: relative;
-  border-radius: var(--radius-md); overflow: hidden;
-  border: 1px solid var(--border); cursor: pointer;
-  box-shadow: 0 0 30px var(--sith-glow);
-}
-.video-container video {
-  width: 100%; display: block; border-radius: var(--radius-md);
-}
-.video-play-overlay {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: rgba(5, 5, 8, 0.6); transition: opacity 0.3s ease;
-}
-.video-play-overlay i { font-size: 3rem; color: var(--sith); text-shadow: 0 0 20px var(--sith-glow); }
-.video-container.playing .video-play-overlay { opacity: 0; pointer-events: none; }
-
 /* ============================================
    Responsive
    ============================================ */
@@ -549,3 +537,9 @@ ul { list-style: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { filter: none; transform: none; opacity: 1; }
 }
+/* --- Inline SVG icons (replaces Font Awesome) --- */
+.icon { width: 1em; height: 1em; display: inline-block; fill: currentColor; }
+.service-icon .icon { width: 1.2rem; height: 1.2rem; }
+.portfolio-card-overlay .icon { width: 1.5rem; height: 1.5rem; }
+.contact-socials .icon { width: 1.1rem; height: 1.1rem; }
+.contact-socials a .icon { display: block; }
