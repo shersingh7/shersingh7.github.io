@@ -21,7 +21,7 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isSmallOrHighDpi });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
 
@@ -213,8 +213,7 @@
       const dy = y - cy;
       cx += dx * 0.1;
       cy += dy * 0.1;
-      cursor.style.left = cx + 'px';
-      cursor.style.top = cy + 'px';
+      cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
 
       if (isMoving || Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
         rafId = requestAnimationFrame(update);
@@ -261,7 +260,7 @@
           const scroll = window.scrollY;
           const height = document.documentElement.scrollHeight - window.innerHeight;
           if (height > 0) {
-            bar.style.width = (scroll / height) * 100 + '%';
+            bar.style.transform = `scaleX(${scroll / height})`;
           }
           ticking = false;
         });
