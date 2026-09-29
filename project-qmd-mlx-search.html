@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QMD MLX Search — Davinder Verma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <meta name="description" content="On-device hybrid search over notes and docs, with MLX-native embeddings. Builds on the open-source QMD project." />
+  <meta property="og:title" content="QMD MLX Search — Davinder Verma" />
+  <meta property="og:description" content="On-device hybrid search over notes and docs, with MLX-native embeddings. Builds on the open-source QMD project." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://davinderverma.ca/img/projects/qmd-mlx-search-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="QMD MLX Search — Davinder Verma" />
+  <meta name="twitter:description" content="On-device hybrid search over notes and docs, with MLX-native embeddings. Builds on the open-source QMD project." />
+  <meta name="twitter:image" content="https://davinderverma.ca/img/projects/qmd-mlx-search-cover.jpg" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="starfield" class="starfield-canvas" aria-hidden="true"></canvas>
+
+  <nav class="nav scrolled" id="nav" data-static-nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-icon">&#9881;</span> DV</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#work" class="nav-link">Work</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="portfolio-detail">
+    <div class="portfolio-detail-hero reveal">
+      <p class="eyebrow">TypeScript · Python · MLX</p>
+      <h1>QMD MLX Search</h1>
+      <p class="portfolio-detail-lead">On-device hybrid search over notes and docs, extending the open-source QMD project with MLX-native embeddings for Apple Silicon.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/qmd-mlx-search" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
+    </div>
+    <div class="portfolio-detail-body reveal">
+      <img class="portfolio-detail-cover" src="img/projects/qmd-mlx-search-cover.jpg" width="720" height="720" alt="Abstract cover art for QMD MLX Search" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>QMD MLX Search builds on <a href="https://github.com/tobi/qmd" target="_blank" rel="noopener">QMD</a>, an open-source local search engine for markdown notes, meeting transcripts and documentation that combines BM25 full-text search, vector search and LLM re-ranking. This fork adds a second embedding backend: a dedicated Python server that runs embedding models directly on the Apple Silicon GPU through Apple’s MLX framework, alongside QMD’s existing GGUF path.</p>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>MLX-native embedding server supporting HuggingFace MLX models such as nomic-embed-text, bge-small and Qwen3 embeddings, with mean, CLS and last-token pooling plus L2 normalization.</li>
+        <li>Binary Float32 transport (<code>/embed-bin</code>) alongside JSON, plus optional MLX endpoints for re-ranking and query expansion.</li>
+        <li>SHA-256 embedding descriptors identify each vector space, so backend selection fails closed rather than mixing incompatible vectors.</li>
+        <li>launchd daemon supervision, readiness and memory endpoints, and idle unloading of model weights to free unified memory.</li>
+        <li>Measured on an Apple M2 Pro (32GB) with nomic-embed-text-v1.5 (768d, float16): ~3.7 ms per text at batch 1, and ~10.7 ms per batch of 32 (2,989 texts/sec) for bulk indexing.</li>
+        <li>Works with QMD’s CLI, MCP server and TypeScript SDK; the MLX backend is enabled with a single environment variable or SDK option.</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>TypeScript</span><span>Python</span><span>MLX</span><span>SQLite FTS5</span><span>sqlite-vec</span><span>node-llama-cpp</span><span>MCP</span></div>
+      <figure class="portfolio-detail-figure">
+        <img src="img/projects/qmd-architecture.jpg" width="1600" height="893" alt="Diagram of the QMD hybrid search pipeline: query expansion, BM25 and vector retrieval, RRF fusion and LLM re-ranking" loading="lazy" decoding="async" />
+        <figcaption>QMD’s hybrid search pipeline: query expansion, parallel BM25 and vector search, rank fusion and LLM re-ranking.</figcaption>
+      </figure>
+    </div>
+    <footer class="footer portfolio-detail-footer">
+      <div class="container">
+        <p>&copy; 2026 Davinder Verma. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" alt="" />
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

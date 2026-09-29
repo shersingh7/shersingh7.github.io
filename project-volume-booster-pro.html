@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Volume Booster Pro — Davinder Verma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <meta name="description" content="A Manifest V3 Chrome extension for per-tab volume control from 0% to 600%, built on the Web Audio API." />
+  <meta property="og:title" content="Volume Booster Pro — Davinder Verma" />
+  <meta property="og:description" content="A Manifest V3 Chrome extension for per-tab volume control from 0% to 600%, built on the Web Audio API." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://davinderverma.ca/img/projects/volume-booster-pro-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Volume Booster Pro — Davinder Verma" />
+  <meta name="twitter:description" content="A Manifest V3 Chrome extension for per-tab volume control from 0% to 600%, built on the Web Audio API." />
+  <meta name="twitter:image" content="https://davinderverma.ca/img/projects/volume-booster-pro-cover.jpg" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="starfield" class="starfield-canvas" aria-hidden="true"></canvas>
+
+  <nav class="nav scrolled" id="nav" data-static-nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-icon">&#9881;</span> DV</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#work" class="nav-link">Work</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="portfolio-detail">
+    <div class="portfolio-detail-hero reveal">
+      <p class="eyebrow">Chrome Extension · Web Audio</p>
+      <h1>Volume Booster Pro</h1>
+      <p class="portfolio-detail-lead">Per-tab volume control up to 600% for Chrome, with a compact popup and clear status feedback.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/volume-booster-pro" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
+    </div>
+    <div class="portfolio-detail-body reveal">
+      <img class="portfolio-detail-cover" src="img/projects/volume-booster-pro-cover.jpg" width="720" height="720" alt="Abstract cover art for Volume Booster Pro" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>Volume Booster Pro is a Manifest V3 Chrome extension that routes a page’s <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> elements through a Web Audio <code>GainNode</code>, letting you set each tab anywhere from 0% to 600%. The content script stays idle until you actually change the volume, and the extension makes no analytics or network calls.</p>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>0%–600% gain per tab, stored locally in <code>chrome.storage.local</code> and cleared when the tab closes.</li>
+        <li>One-click presets: Mute, Normal 100%, Boost 200%, Loud 400% and Max 600%, plus arrow-key adjustment in 5% steps.</li>
+        <li>A status pill reports Ready, waiting for a gesture, no media, unavailable or error, and a warning appears above 300% where clipping becomes likely.</li>
+        <li>Works across iframes: the popup enumerates every frame on the tab and each frame builds its own audio graph.</li>
+        <li>Lightweight idle path — no polling and no <code>AudioContext</code> created until the first volume change.</li>
+        <li>No analytics, remote code or network calls; volume preferences never leave the device.</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>JavaScript</span><span>Chrome MV3</span><span>Web Audio API</span><span>HTML</span><span>CSS</span><span>Node.js</span></div>
+      <figure class="portfolio-detail-figure">
+        <img src="img/projects/volume-booster-pro-screenshot.jpg" width="1280" height="800" alt="Volume Booster Pro popup showing the volume slider, presets and status pill" loading="lazy" decoding="async" />
+        <figcaption>The Volume Booster Pro popup.</figcaption>
+      </figure>
+    </div>
+    <footer class="footer portfolio-detail-footer">
+      <div class="container">
+        <p>&copy; 2026 Davinder Verma. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" alt="" />
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
