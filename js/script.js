@@ -1,5 +1,5 @@
 /* ============================================
-   DAVINDER VERMA — IMPERIAL PORTFOLIO JS
+   DAVINDER VERMA — PORTFOLIO JS
    Canvas 2D starfield, text scramble, cursor,
    scroll spy, tilt cards, counter, lightbox
    ============================================ */
