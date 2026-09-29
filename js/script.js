@@ -237,16 +237,25 @@
   }
 
   // --- IntersectionObserver reveal ---
+  // threshold 0: tall blocks (project detail bodies) must reveal as soon as any part is on screen;
+  // a ratio threshold never fires for content taller than ~10x the visible sliver.
   function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
+    if (!('IntersectionObserver' in window)) {
+      reveals.forEach((el) => el.classList.add('visible'));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       }),
-      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' }
     );
-    reveals.forEach((el) => observer.observe(el));
+    reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      else observer.observe(el);
+    });
   }
 
   // --- Smooth scroll for anchor links ---
