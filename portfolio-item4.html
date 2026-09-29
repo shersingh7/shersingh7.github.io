@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <meta name="description" content="A full-stack food ordering website built with Node.js and Express." />
+  <meta name="description" content="An Indian food-ordering site built with Node.js, Express and MongoDB, with accounts, a clerk role for managing meals, and a session-based cart." />
   <meta property="og:title" content="Desi Khanna — Davinder Verma" />
-  <meta property="og:description" content="A full-stack food ordering website built with Node.js and Express." />
+  <meta property="og:description" content="An Indian food-ordering site built with Node.js, Express and MongoDB, with accounts, a clerk role for managing meals, and a session-based cart." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://davinderverma.ca/img/profile.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Desi Khanna — Davinder Verma" />
-  <meta name="twitter:description" content="A full-stack food ordering website built with Node.js and Express." />
+  <meta name="twitter:description" content="An Indian food-ordering site built with Node.js, Express and MongoDB, with accounts, a clerk role for managing meals, and a session-based cart." />
   <meta name="twitter:image" content="https://davinderverma.ca/img/profile.jpg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
@@ -42,12 +42,31 @@
 
   <main class="portfolio-detail">
     <div class="portfolio-detail-hero reveal">
-      <p class="eyebrow">Full-Stack · Node.js</p>
+      <p class="eyebrow">Full-Stack · Node.js · MongoDB</p>
       <h1>Desi Khanna</h1>
+      <p class="portfolio-detail-lead">An Indian food-ordering site built with Node.js, Express and MongoDB, with accounts, a clerk role for managing meals, and a session-based cart.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/WEB322-ASSIGNMENT-DAVINDER_VERMA" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
     </div>
     <div class="portfolio-detail-body reveal">
-      <p>A full-stack food ordering website built with Node.js and Express. It includes multi-user authentication, a shopping cart, and a complete order flow.</p>
-      <img src="img/desiKhanna.jpg" width="800" height="373" alt="Desi Khanna food ordering website" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>Desi Khanna is a server-rendered Express app organised in an MVC style — controllers, Mongoose models, and Handlebars views and partials. Customers browse meal packages, build a cart and place orders; data-entry clerks maintain the menu. Built for Seneca’s WEB322 course in Winter 2021 as a full pass through auth, persistence and transactional email.</p>
+      <figure class="portfolio-detail-figure">
+        <img src="img/desiKhanna.jpg" width="800" height="373" alt="Desi Khanna home page with the red navigation header, Sign Up and Login buttons, and a hero banner of Indian dishes with a Get Started button" loading="lazy" decoding="async" />
+        <figcaption>The Desi Khanna home page.</figcaption>
+      </figure>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>Registration with bcrypt-hashed passwords and a SendGrid welcome email; login state held in <code>express-session</code>.</li>
+        <li>Two roles — customer and data-entry clerk — with separate views after sign-in.</li>
+        <li>Clerks add and edit meal packages, including photo uploads via <code>express-fileupload</code>.</li>
+        <li>Customers browse “On the Menu” and top meals, open meal descriptions, and add items to a session-based cart with a running total.</li>
+        <li>Placing an order sends the customer an order summary by email; data lives in MongoDB through Mongoose, with <code>mongodb-memory-server</code> for local development.</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Mongoose</span><span>Handlebars</span><span>bcrypt</span><span>SendGrid</span></div>
     </div>
     <footer class="footer portfolio-detail-footer">
       <div class="container">

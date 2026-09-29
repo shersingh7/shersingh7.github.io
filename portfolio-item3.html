@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <meta name="description" content="An Android weather app showing real-time conditions for your location via WeatherAPI." />
+  <meta name="description" content="A Java Android app that shows current weather for your location or any place you search, using WeatherAPI.com and Retrofit." />
   <meta property="og:title" content="Weather App — Davinder Verma" />
-  <meta property="og:description" content="An Android weather app showing real-time conditions for your location via WeatherAPI." />
+  <meta property="og:description" content="A Java Android app that shows current weather for your location or any place you search, using WeatherAPI.com and Retrofit." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://davinderverma.ca/img/profile.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Weather App — Davinder Verma" />
-  <meta name="twitter:description" content="An Android weather app showing real-time conditions for your location via WeatherAPI." />
+  <meta name="twitter:description" content="A Java Android app that shows current weather for your location or any place you search, using WeatherAPI.com and Retrofit." />
   <meta name="twitter:image" content="https://davinderverma.ca/img/profile.jpg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
@@ -42,12 +42,31 @@
 
   <main class="portfolio-detail">
     <div class="portfolio-detail-hero reveal">
-      <p class="eyebrow">Android · API</p>
+      <p class="eyebrow">Android · Java · REST API</p>
       <h1>Weather App</h1>
+      <p class="portfolio-detail-lead">A Java Android app that shows current weather for your location or any place you search, using WeatherAPI.com and Retrofit.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/Android-Weather-App" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
     </div>
     <div class="portfolio-detail-body reveal">
-      <p>An Android weather app that uses your current location to fetch real-time conditions from WeatherAPI.</p>
-      <img src="img/weatherMain.jpg" width="480" height="480" alt="Weather App on Android showing current conditions for the user's location" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>The app reads the device location through Google Play Services, calls WeatherAPI.com’s <code>current.json</code> endpoint, and presents the current conditions on a single screen. You can also look up weather by place name instead of relying on location. Built in 2021 as an early exercise in consuming a REST API from Android.</p>
+      <figure class="portfolio-detail-figure">
+        <img src="img/weather-app-screenshot.jpg" width="407" height="862" alt="Weather App on an Android emulator showing current conditions: partly cloudy, 17.5 °C, wind, humidity, UV and visibility" loading="lazy" decoding="async" />
+        <figcaption>Current conditions for the device's location, fetched from WeatherAPI.com.</figcaption>
+      </figure>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>Current conditions for the device’s location, resolved with Google Play Services location.</li>
+        <li>Lookup by place name, passed to the API as the <code>q</code> query parameter.</li>
+        <li>Shows city and country, condition, temperature, feels-like, wind speed and direction, humidity, UV index and visibility.</li>
+        <li>Networking with Retrofit and a Gson converter, mapping JSON responses into typed model classes.</li>
+        <li>Small, separated structure: a <code>RetrofitClient</code>, an <code>API</code> interface, a <code>LocationHelper</code> and dedicated models.</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>Java</span><span>Android</span><span>Retrofit</span><span>Gson</span><span>Play Services Location</span><span>WeatherAPI</span></div>
     </div>
     <footer class="footer portfolio-detail-footer">
       <div class="container">

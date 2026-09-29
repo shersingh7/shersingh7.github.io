@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <meta name="description" content="A real-time chat app for Android, built on a Firebase backend." />
+  <meta name="description" content="A one-to-one Android chat app in Kotlin, with Firebase Authentication and messages synced live through Firebase Realtime Database." />
   <meta property="og:title" content="Chat App — Davinder Verma" />
-  <meta property="og:description" content="A real-time chat app for Android, built on a Firebase backend." />
+  <meta property="og:description" content="A one-to-one Android chat app in Kotlin, with Firebase Authentication and messages synced live through Firebase Realtime Database." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://davinderverma.ca/img/profile.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Chat App — Davinder Verma" />
-  <meta name="twitter:description" content="A real-time chat app for Android, built on a Firebase backend." />
+  <meta name="twitter:description" content="A one-to-one Android chat app in Kotlin, with Firebase Authentication and messages synced live through Firebase Realtime Database." />
   <meta name="twitter:image" content="https://davinderverma.ca/img/profile.jpg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
@@ -42,12 +42,32 @@
 
   <main class="portfolio-detail">
     <div class="portfolio-detail-hero reveal">
-      <p class="eyebrow">Android · Java</p>
+      <p class="eyebrow">Android · Kotlin · Firebase</p>
       <h1>Chat App</h1>
+      <p class="portfolio-detail-lead">A one-to-one Android chat app in Kotlin, with Firebase Authentication and messages synced live through Firebase Realtime Database.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/ChatApp" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
     </div>
     <div class="portfolio-detail-body reveal">
-      <p>A real-time chat app for Android. Messages are delivered live between users, with Firebase providing the backend.</p>
-      <img src="img/chat.png" width="480" height="480" alt="Chat App on Android showing a real-time conversation" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>Chat App lets people create an account, see everyone else who has signed up, and open a private conversation with any of them. Firebase handles both sign-in and storage, so messages appear on both devices as soon as they are sent, without a custom backend.</p>
+      <p>Context: an early Android project, last updated in 2021, built to learn Kotlin and Firebase fundamentals.</p>
+      <figure class="portfolio-detail-figure">
+        <img src="img/chat.png" width="480" height="480" alt="Two Android phones showing both sides of the same Chat App conversation, with sent messages in purple bubbles and received messages in grey" loading="lazy" decoding="async" />
+        <figcaption>The same conversation, seen from each participant’s phone.</figcaption>
+      </figure>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>Email and password sign-up, log-in and sign-out with Firebase Authentication; each user’s profile is stored under <code>user/&lt;uid&gt;</code>.</li>
+        <li>A home screen listing registered users in a <code>RecyclerView</code>; tapping a name opens the chat.</li>
+        <li>Every message is written to both a sender room and a receiver room under <code>chats/&lt;room&gt;/messages</code>, so each side of the conversation updates in real time.</li>
+        <li>A simple structure of four activities — LogIn, SignUp, MainActivity and ChatActivity — with separate adapters for users and messages.</li>
+        <li>Material Components and ConstraintLayout for the UI, supporting Android 8.1 (API 27) and up.</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>Kotlin</span><span>Android</span><span>Firebase Auth</span><span>Firebase Realtime Database</span><span>Material Components</span></div>
     </div>
     <footer class="footer portfolio-detail-footer">
       <div class="container">

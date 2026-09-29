@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <meta name="description" content="An Android take on Google Lens, using Firebase ML Kit for object detection." />
+  <meta name="description" content="An Android visual-search app that labels objects, reads text and scans barcodes on-device with ML Kit, then searches the web for what it finds." />
   <meta property="og:title" content="Google Lens Clone — Davinder Verma" />
-  <meta property="og:description" content="An Android take on Google Lens, using Firebase ML Kit for object detection." />
+  <meta property="og:description" content="An Android visual-search app that labels objects, reads text and scans barcodes on-device with ML Kit, then searches the web for what it finds." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://davinderverma.ca/img/profile.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Google Lens Clone — Davinder Verma" />
-  <meta name="twitter:description" content="An Android take on Google Lens, using Firebase ML Kit for object detection." />
+  <meta name="twitter:description" content="An Android visual-search app that labels objects, reads text and scans barcodes on-device with ML Kit, then searches the web for what it finds." />
   <meta name="twitter:image" content="https://davinderverma.ca/img/profile.jpg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
@@ -42,12 +42,32 @@
 
   <main class="portfolio-detail">
     <div class="portfolio-detail-hero reveal">
-      <p class="eyebrow">Android · ML Kit</p>
+      <p class="eyebrow">Android · Java · ML Kit</p>
       <h1>Google Lens Clone</h1>
+      <p class="portfolio-detail-lead">An Android visual-search app that labels objects, reads text and scans barcodes on-device with ML Kit, then searches the web for what it finds.</p>
+      <div class="portfolio-detail-links">
+        <a href="https://github.com/shersingh7/Google-Lens-Clone" class="btn btn-sith" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="index.html#work" class="btn btn-ghost">All Projects</a>
+      </div>
     </div>
     <div class="portfolio-detail-body reveal">
-      <p>An Android app modelled on Google Lens. It uses Firebase ML Kit object detection to identify objects in real time.</p>
-      <img src="img/googleLensClone.png" width="300" height="640" alt="Google Lens Clone on Android identifying an object with ML Kit" loading="lazy" decoding="async" />
+      <h2>Overview</h2>
+      <p>Google Lens Clone takes a photo from the camera, the gallery or another app’s share sheet and analyses it on the device with Google ML Kit. Depending on the mode, it identifies what is in the picture, extracts the text or decodes a barcode, and it can run a web search on the detected labels.</p>
+      <p>Context: first built in 2021 around Firebase ML Kit object detection, then rebuilt as v2.0 in 2026 with a Material 3 interface and a wider set of analysis modes.</p>
+      <figure class="portfolio-detail-figure">
+        <img src="img/googleLensClone.png" width="300" height="640" alt="The original 2021 Google Lens Clone home screen on Android, with a scan illustration above Snap and Get Search Result buttons on a dark blue background" loading="lazy" decoding="async" />
+        <figcaption>The original 2021 version of the app.</figcaption>
+      </figure>
+      <h2>Highlights</h2>
+      <ul class="portfolio-detail-highlights">
+        <li>Three analysis modes: image labeling with confidence scores, text recognition with copy and share, and barcode/QR scanning with type detection and an open-link action for URLs.</li>
+        <li>On-device ML Kit APIs for image labeling, text recognition, barcode scanning and object detection.</li>
+        <li>Web search for detected labels through SerpAPI, with results shown as cards (Volley and OkHttp for requests, Glide for images).</li>
+        <li>Images come from the camera, the gallery, or straight from other apps via the share sheet.</li>
+        <li>Search history persisted locally with Room, in a dark-first Material 3 design targeting API 34 (minimum API 26).</li>
+      </ul>
+      <h2>Stack</h2>
+      <div class="service-tags portfolio-detail-stack"><span>Java</span><span>Android</span><span>ML Kit</span><span>CameraX</span><span>Room</span><span>Material 3</span><span>SerpAPI</span></div>
     </div>
     <footer class="footer portfolio-detail-footer">
       <div class="container">
